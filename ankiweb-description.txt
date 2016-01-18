@@ -1,0 +1,32 @@
+Tag Toggler is an add-on for Anki 2 that lets you quickly add and edit tags
+while reviewing.  You can customize keyboard shortcuts for editing all tags on
+the current card, as well as quickly adding, deleting, or toggling specific
+preset tags.  Optionally, you can bury or suspend the note after applying the
+tags.
+
+For example, here are some ways that I use the add-on:
+<ul>
+<li> Toggle the 'hard' tag on the current card:
+<code>    'H': {'tags': 'hard', 'action': 'toggle'}</code>
+<li> Add a 'TODO' tag and bury the current card:
+<code>    'T': {'tags': 'TODO', 'after': 'bury'}</code>
+<li> Add an 'easy' tag and suspend the current card:
+<code>    'A': {'tags': 'easy', 'after': 'suspend'}</code>
+</ul>
+
+Customization is fairly straightforward, with instructions in the source code.
+
+Tag Toggler was inspired by the Quick Tagging add-on by Cayenne Boyer.
+
+<b>Changelog</b>
+
+2016-01-16: Version 1.0.0
+
+<b>Links</b>
+
+* Source code repository: github.com/ohspite/anki-tag-toggler
+
+<b>Feedback?</b>
+
+If you have any bugs to report, feature requests, or other feedback, please
+use the GitHub issue tracker: github.com/ohspite/anki-tag-toggler/issues
