@@ -23,8 +23,10 @@ Tagging](https://github.com/cayennes/Quick_Tagging) add-on by Cayenne Boyer.
 ## Setup ##
 
 Install the addon from the [Anki add-on
-page](https://ankiweb.net/shared/addons/).  After launching Anki, customize
-the keybindings by editing the source code found under *Tools/Add-ons*.
+page](https://ankiweb.net/shared/addons/) by pasting the code 874498171 into
+Anki (*Tools > Add-ons > Browse & Install...*).  After launching Anki,
+customize the keybindings by editing the source code found under *Tools >
+Add-ons*.
 
 Customization is fairly straightforward, with instructions in the source code.
 
