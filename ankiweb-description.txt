@@ -20,13 +20,26 @@ Tag Toggler was inspired by the Quick Tagging add-on by Cayenne Boyer.
 
 <b>Changelog</b>
 
-2016-01-16: Version 1.0.0
+<ul>
+<li> 2016-01-25: Version 1.1.0
+  <ul>
+  <li> Allow suspending individual cards with the 'bury-card' and
+  'suspend-card' actions.
+  <li> Call note.flush after using tagging dialog.
+  <li> Redraw the card after making changes to tags, in case {{Tags}} is being
+  used in the template.
+  </ul>
+<li> 2016-01-16: Version 1.0.0
+</ul>
 
 <b>Links</b>
 
-* Source code repository: github.com/ohspite/anki-tag-toggler
+Source code repository: github.com/ohspite/anki-tag-toggler
 
 <b>Feedback?</b>
 
 If you have any bugs to report, feature requests, or other feedback, please
 use the GitHub issue tracker: github.com/ohspite/anki-tag-toggler/issues
+
+<b>Please post bug reports on GitHub</b>.  We can't track and discuss problems
+in the comments.
