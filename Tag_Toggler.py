@@ -129,6 +129,7 @@ def edit_tag_dialog(note):
     (tag_string, dialog_status) = getTag(mw, mw.col, prompt, default=note.stringTags())
     if dialog_status != 0:  # means "Cancel"
         note.setTagsFromStr(tag_string)
+        note.flush()
         tooltip('Tags set to: "{}"'.format(tag_string))
 
 
