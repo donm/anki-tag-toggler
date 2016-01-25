@@ -8,10 +8,10 @@ For example, here are some ways that I use the add-on:
 <ul>
 <li> Toggle the 'hard' tag on the current card:
 <code>    'H': {'tags': 'hard', 'action': 'toggle'}</code>
-<li> Add a 'TODO' tag and bury the current card:
-<code>    'T': {'tags': 'TODO', 'after': 'bury'}</code>
+<li> Add a 'TODO' tag and bury cards in the current note:
+<code>    'T': {'tags': 'TODO', 'after': 'bury-note'}</code>
 <li> Add an 'easy' tag and suspend the current card:
-<code>    'A': {'tags': 'easy', 'after': 'suspend'}</code>
+<code>    'A': {'tags': 'easy', 'after': 'suspend-card'}</code>
 </ul>
 
 Customization is fairly straightforward, with instructions in the source code.

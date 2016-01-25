@@ -39,8 +39,10 @@ tag_dialog_shortcut = 't'
 ## 'action': How to modify tags; options are 'add' (the default), 'delete',
 ## and 'toggle' (delete tag if present, add it if absent).
 ##
-## 'after': What to do to a card after modifying the tags, either 'bury' or
-## 'suspend'.
+## 'after': What to do to a card after modifying the tags; options are
+## 'bury-card', 'bury-note', 'suspend-card' or 'suspend-note'.  Also 'suspend'
+## and 'bury, which are the same as the '-note' versions.
+##
 ## Keybinding to add tags:
 ##    'h': {'tags': 'hard'}
 ## 'add' is the default action, so this is the same:
@@ -52,14 +54,14 @@ tag_dialog_shortcut = 't'
 ## Keybinding to toggle tag:
 ##    'H': {'tags': 'hard', 'action': 'toggle'}
 ## Bury a card after adding a tag:
-##    'T': {'tags': 'TODO', 'after': 'bury'}
-## Suspend a card after adding a tag:
-##    'A': {'tags': 'easy', 'after': 'suspend'}
+##    'T': {'tags': 'TODO', 'after': 'bury-card'}
+## Suspend a note after adding a tag:
+##    'A': {'tags': 'easy', 'after': 'suspend-note'}
 
 tag_shortcuts = {
 #    'H': {'tags': 'hard', 'action': 'toggle'},
-#    'T': {'tags': 'TODO', 'after': 'bury'},
-#    'A': {'tags': 'easy', 'after': 'suspend'},
+#    'T': {'tags': 'TODO', 'after': 'bury-note'},
+#    'A': {'tags': 'easy', 'after': 'suspend-card'},
 }
 
 ## END CONFIGURATION OPTIONS
@@ -81,8 +83,10 @@ tag_shortcuts = {
     # 'c': {'tags': 'test-a test-b'},
     # 'q': {'tags': 'test-a test-b', 'action': 'delete'},
     # 'Q': {'tags': 'test-a test-b', 'action': 'toggle'},
-    # 'r': {'tags': 'test-a test-b', 'after': 'bury'},
-    # 'R': {'tags': 'test-a test-b', 'after': 'suspend'},
+    # 'r': {'tags': 'test-a test-b', 'after': 'bury-note'},
+    # 'R': {'tags': 'test-a test-b', 'after': 'suspend-note'},
+    # 's': {'tags': 'test-a test-b', 'after': 'bury-card'},
+    # 'S': {'tags': 'test-a test-b', 'after': 'suspend-card'},
 
 
 from aqt import mw
@@ -103,15 +107,24 @@ def tagKeyHandler(self, event, _old):
         if 'action' not in binding:
             binding['action'] = 'add'
 
-        if 'after' in binding and binding['after'] == 'suspend':
-            mw.checkpoint("Edit Tags and Suspend")
+        if ('after' in binding and
+            binding['after'] in ['suspend', 'suspend-note']):
+            mw.checkpoint("Edit Tags and Suspend Note")
             tooltip_message = 'Suspended note and edited tags: {}'
             self.mw.col.sched.suspendCards(
                 [card.id for card in self.card.note().cards()])
-        elif 'after' in binding and binding['after'] == 'bury':
-            mw.checkpoint("Edit Tags and Bury")
+        elif 'after' in binding and binding['after'] in ['bury', 'bury-note']:
+            mw.checkpoint("Edit Tags and Bury Note")
             tooltip_message = 'Buried note and edited tags: {}'
             mw.col.sched.buryNote(note.id)
+        elif 'after' in binding and binding['after'] == 'suspend-card':
+            mw.checkpoint("Edit Tags and Suspend Card")
+            tooltip_message = 'Suspended card and edited tags: {}'
+            self.mw.col.sched.suspendCards([self.card.id])
+        elif 'after' in binding and binding['after'] == 'bury-card':
+            mw.checkpoint("Edit Tags and Bury Card")
+            tooltip_message = 'Buried card and edited tags: {}'
+            mw.col.sched.buryCards([self.id])
         else:
             mw.checkpoint(_("edit Tags"))
             tooltip_message = 'Edited tags: {}'
@@ -193,7 +206,9 @@ def shortcuts_are_okay():
         command = tag_shortcuts[shortcut]
         if not check_command(command, 'action', ['add', 'delete', 'toggle']):
             return False
-        if not check_command(command, 'after', ['bury', 'suspend']):
+        if not check_command(command, 'after',
+                             ['bury', 'bury-card', 'bury-note',
+                              'suspend', 'suspend-card', 'suspend-note']):
             return False
 
     return True

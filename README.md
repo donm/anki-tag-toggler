@@ -9,13 +9,13 @@ For example, here are some ways that I use the add-on:
 
 `    'H': {'tags': 'hard', 'action': 'toggle'}`
 
-- Add a 'TODO' tag and bury the current card:
+- Add a 'TODO' tag and bury cards in the current note:
 
-`    'T': {'tags': 'TODO', 'after': 'bury'}`
+`    'T': {'tags': 'TODO', 'after': 'bury-note'}`
 
 - Add an 'easy' tag and suspend the current card:
 
-`    'A': {'tags': 'easy', 'after': 'suspend'}`
+`    'A': {'tags': 'easy', 'after': 'suspend-card'}`
 
 Tag Toggler was inspired by the [Quick
 Tagging](https://github.com/cayennes/Quick_Tagging) add-on by Cayenne Boyer.
