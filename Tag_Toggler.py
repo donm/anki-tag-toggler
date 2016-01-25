@@ -117,7 +117,7 @@ def tagKeyHandler(self, event, _old):
             tooltip_message = 'Edited tags: {}'
 
         tag_edits = edit_note_tags(note, binding['tags'], binding['action'])
-        mw.reset()
+        redraw_card()
         tooltip(tooltip_message.format(tag_edits))
     else:
         _old(self, event)
@@ -130,7 +130,14 @@ def edit_tag_dialog(note):
     if dialog_status != 0:  # means "Cancel"
         note.setTagsFromStr(tag_string)
         note.flush()
+        redraw_card()
         tooltip('Tags set to: "{}"'.format(tag_string))
+
+
+def redraw_card():
+    """Refresh the card in case {{Tags}} is in the template."""
+    # TODO It would be better to do this without resetting the state.
+    mw.reset()
 
 
 def edit_note_tags(note, tags, action='add'):
