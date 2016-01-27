@@ -1,4 +1,4 @@
-# Tag Toggler 1.0.0 (2016-01-17)
+# Tag Toggler 1.1.0+2016.01.27.0043 (2016-01-27)
 # Copyright: Don March <don@ohspite.net>
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 #
@@ -28,7 +28,7 @@
 tag_dialog_shortcut = 't'
 # tag_dialog_shortcut = None
 
-## Add items to the `tag_toggles` dict to create shortcuts that modify
+## Add items to the `tag_shortcuts` dict to create shortcuts that modify
 ## tags. The dict keys are the key for the keyboard shortcut, and each should
 ## refer to a dict to specify the command.  Valid keys in that dict are
 ## 'tags', 'action', and 'after'.
@@ -43,7 +43,7 @@ tag_dialog_shortcut = 't'
 ## 'bury-card', 'bury-note', 'suspend-card' or 'suspend-note'.  Also 'suspend'
 ## and 'bury, which are the same as the '-note' versions.
 ##
-## Keybinding to add tags:
+## Example keybinding to add tags:
 ##    'h': {'tags': 'hard'}
 ## 'add' is the default action, so this is the same:
 ##    'h': {'tags': 'hard', 'action': 'add'}
