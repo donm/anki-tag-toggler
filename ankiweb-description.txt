@@ -16,6 +16,8 @@ Tag Toggler was inspired by the Quick Tagging add-on by Cayenne Boyer.
 
 <b>Changelog</b>
 <ul>
+<li> 2016-01-25: Version 1.1.1
+  - Fix bug occurring when using the 'bury-card' option after tagging a card.</li>
 <li> 2016-01-25: Version 1.1.0
   - Allow suspending individual cards with the 'bury-card' and 'suspend-card' actions.
   - Call <code>note.flush</code> after using tagging dialog.
