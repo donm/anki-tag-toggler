@@ -1,4 +1,4 @@
-# Tag Toggler 1.1.0+2016.01.27.0043 (2016-01-27)
+# Tag Toggler 1.1.1 (2016-02-06)
 # Copyright: Don March <don@ohspite.net>
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 #
@@ -124,7 +124,7 @@ def tagKeyHandler(self, event, _old):
         elif 'after' in binding and binding['after'] == 'bury-card':
             mw.checkpoint("Edit Tags and Bury Card")
             tooltip_message = 'Buried card and edited tags: {}'
-            mw.col.sched.buryCards([self.id])
+            mw.col.sched.buryCards([self.card.id])
         else:
             mw.checkpoint(_("edit Tags"))
             tooltip_message = 'Edited tags: {}'
