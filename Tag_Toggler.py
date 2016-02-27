@@ -56,7 +56,7 @@ tag_dialog_shortcut = 't'
 ## Bury a card after adding a tag:
 ##    'T': {'tags': 'TODO', 'after': 'bury-card'}
 ## Suspend a note after adding a tag:
-##    'A': {'tags': 'easy', 'after': 'suspend-note'}
+##    'Alt+Shift+E': {'tags': 'easy', 'after': 'suspend-note'}
 
 tag_shortcuts = {
 #    'H': {'tags': 'hard', 'action': 'toggle'},
@@ -88,6 +88,8 @@ tag_shortcuts = {
     # 's': {'tags': 'test-a test-b', 'after': 'bury-card'},
     # 'S': {'tags': 'test-a test-b', 'after': 'suspend-card'},
 
+from PyQt4.QtCore import Qt
+from PyQt4.QtGui import QKeySequence
 
 from aqt import mw
 from aqt.utils import getTag, tooltip, showInfo
@@ -97,13 +99,37 @@ from anki.hooks import wrap
 
 def tagKeyHandler(self, event, _old):
     """Wrap default _keyHandler with new keybindings."""
-    key = unicode(event.text())
+    key = event.key()
+
+    # unknown key
+    if key == Qt.Key_unknown:
+        return
+    # only modifier pushed
+    if(key == Qt.Key_Control or
+    key == Qt.Key_Shift or
+    key == Qt.Key_Alt or
+    key == Qt.Key_Meta):
+        return
+    # check for combination of keys and modifiers
+    modifiers = event.modifiers()
+    keyText = event.text()
+
+    if modifiers & Qt.ShiftModifier:
+        key += Qt.SHIFT
+    if modifiers & Qt.ControlModifier:
+        key += Qt.CTRL
+    if modifiers & Qt.AltModifier:
+        key += Qt.ALT
+    if modifiers & Qt.MetaModifier:
+        key += Qt.META
+    keySequence = QKeySequence(key).toString(QKeySequence.PortableText)
+
     note = mw.reviewer.card.note()
-    if tag_dialog_shortcut and key == tag_dialog_shortcut:
+    if tag_dialog_shortcut and keySequence == tag_dialog_shortcut:
         mw.checkpoint(_("Edit Tags"))
         edit_tag_dialog(note)
-    elif key in tag_shortcuts:
-        binding = tag_shortcuts[key]
+    elif keySequence in tag_shortcuts:
+        binding = tag_shortcuts[keySequence]
         if 'action' not in binding:
             binding['action'] = 'add'
 
