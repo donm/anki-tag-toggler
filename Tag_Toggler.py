@@ -149,8 +149,10 @@ def edit_tag_dialog(note):
 
 def redraw_card():
     """Refresh the card in case {{Tags}} is in the template."""
-    # TODO It would be better to do this without resetting the state.
+    isq = mw.reviewer.state == "question" # preserve reviewer state
     mw.reset()
+    if not isq:
+        mw.reviewer._showAnswerHack()
 
 
 def edit_note_tags(note, tags, action='add'):
