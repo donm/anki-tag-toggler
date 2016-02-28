@@ -130,7 +130,7 @@ def tagKeyHandler(self, event, _old):
             tooltip_message = 'Edited tags: {}'
 
         tag_edits = edit_note_tags(note, binding['tags'], binding['action'])
-        redraw_card()
+        reset_and_redraw()
         tooltip(tooltip_message.format(tag_edits))
     else:
         _old(self, event)
@@ -143,15 +143,15 @@ def edit_tag_dialog(note):
     if dialog_status != 0:  # means "Cancel"
         note.setTagsFromStr(tag_string)
         note.flush()
-        redraw_card()
+        reset_and_redraw()
         tooltip('Tags set to: "{}"'.format(tag_string))
 
 
-def redraw_card():
-    """Refresh the card in case {{Tags}} is in the template."""
-    isq = mw.reviewer.state == "question" # preserve reviewer state
+def reset_and_redraw():
+    """Rebuild the scheduler and redraw the card."""
+    answer_state = (mw.reviewer.state == "answer")
     mw.reset()
-    if not isq:
+    if answer_state:
         mw.reviewer._showAnswerHack()
 
 
