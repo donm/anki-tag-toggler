@@ -88,6 +88,7 @@ tag_shortcuts = {
     # 's': {'tags': 'test-a test-b', 'after': 'bury-card'},
     # 'S': {'tags': 'test-a test-b', 'after': 'suspend-card'},
 
+
 from PyQt4.QtCore import Qt
 from PyQt4.QtGui import QKeySequence
 
@@ -101,19 +102,17 @@ def tagKeyHandler(self, event, _old):
     """Wrap default _keyHandler with new keybindings."""
     key = event.key()
 
-    # unknown key
     if key == Qt.Key_unknown:
         return
     # only modifier pushed
-    if(key == Qt.Key_Control or
-    key == Qt.Key_Shift or
-    key == Qt.Key_Alt or
-    key == Qt.Key_Meta):
+    if (key == Qt.Key_Control or
+        key == Qt.Key_Shift or
+        key == Qt.Key_Alt or
+        key == Qt.Key_Meta):
         return
+
     # check for combination of keys and modifiers
     modifiers = event.modifiers()
-    keyText = event.text()
-
     if modifiers & Qt.ShiftModifier:
         key += Qt.SHIFT
     if modifiers & Qt.ControlModifier:
@@ -122,14 +121,15 @@ def tagKeyHandler(self, event, _old):
         key += Qt.ALT
     if modifiers & Qt.MetaModifier:
         key += Qt.META
-    keySequence = QKeySequence(key).toString(QKeySequence.PortableText)
+
+    key_sequence = QKeySequence(key).toString(QKeySequence.PortableText)
 
     note = mw.reviewer.card.note()
-    if tag_dialog_shortcut and keySequence == tag_dialog_shortcut:
+    if tag_dialog_shortcut and key_sequence == tag_dialog_shortcut:
         mw.checkpoint(_("Edit Tags"))
         edit_tag_dialog(note)
-    elif keySequence in tag_shortcuts:
-        binding = tag_shortcuts[keySequence]
+    elif key_sequence in tag_shortcuts:
+        binding = tag_shortcuts[key_sequence]
         if 'action' not in binding:
             binding['action'] = 'add'
 
