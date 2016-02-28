@@ -152,7 +152,10 @@ def reset_and_redraw():
     answer_state = (mw.reviewer.state == "answer")
     mw.reset()
     if answer_state:
-        mw.reviewer._showAnswerHack()
+        try:
+            mw.reviewer._showAnswerHack()
+        except:
+            pass
 
 
 def edit_note_tags(note, tags, action='add'):
