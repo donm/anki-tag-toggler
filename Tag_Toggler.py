@@ -8,7 +8,7 @@
 # (https://github.com/cayennes/Quick_Tagging)
 
 ########################################
-## CONFIGURATION OPTIONS
+## CONFIGURATION INSTRUCTIONS
 
 ## There are two variables to edit--tag_dialog_shortcut and tag_shortcuts.
 
@@ -17,15 +17,45 @@
 
 ## You can overwrite some previously existing shortcuts, but it's easiest if
 ## you pick keys that are unused or that are shortcuts when reviewing cards
-## only (defined in Reviewer._keyHandler).  Some keys (such as 'a' for Add or
-## 'b' for Browse are defined elsewhere; the effect of adding Tag Toggle
-## functionality to these keys is undefined.
+## only (defined in Reviewer._keyHandler).  Some keys (such as 'A' for Add or
+## 'B' for Browse are defined elsewhere; the effect of adding Tag Toggle
+## functionality to these keys is not well defined.
+
+## Keybindings are strings that specify modifiers plus the primary key that
+## triggers the action.  If the primary key is a letter, it must be uppercase.
+
+## You can specify keybindings that include any combination of the following
+## modifier keys: Meta, Ctrl, Alt, Shift.  When including modifiers they must
+## be listed in that order (Meta, Ctrl, Alt, Shift), omitting any that you
+## don't want to use.
+
+## Examples of correct and incorrect keybindings:
+##
+##     'T'                     # correct (T key without any modifiers)
+##     'Shift+T                # correct (T key while holding Shift)
+##     'Meta+Ctrl+Alt+Shift+T' # correct
+##     'Ctrl+Shift+T'          # correct
+##
+##     't'                     # incorrect (letter keys must be uppercase)
+##     'Shift+Ctrl+T'          # incorrect (wrong modifier order)
+##     'ctrl+shift+T'          # incorrect (case is significant)
+
+## If you are unsure how to bind a particular key combination, you can
+## uncomment the following line in the tagKeyHandler function:
+##
+##     showInfo(key_sequence)
+##
+## When reviewing cards, this will catch and display all key combinations that
+## are pressed.
+
+########################################
+## CONFIGURATION OPTIONS
 
 ## Change `tag_dialog_shortcut` to the key you want to open a dialog to
 ## quickly edit tags.  Set `tag_dialog_shortcut = None` to disable the
 ## shortcut.
-
-tag_dialog_shortcut = 't'
+tag_dialog_shortcut = 'T'
+# tag_dialog_shortcut = 'Shift+T'
 # tag_dialog_shortcut = None
 
 ## Add items to the `tag_shortcuts` dict to create shortcuts that modify
@@ -52,19 +82,21 @@ tag_dialog_shortcut = 't'
 ## Keybinding to delete tags (if they are present):
 ##    'h': {'tags': 'hard marked', 'action': 'delete'}
 ## Keybinding to toggle tag:
-##    'H': {'tags': 'hard', 'action': 'toggle'}
+##    'Shift+H': {'tags': 'hard', 'action': 'toggle'}
 ## Bury a card after adding a tag:
-##    'T': {'tags': 'TODO', 'after': 'bury-card'}
+##    'Shift+T': {'tags': 'TODO', 'after': 'bury-card'}
 ## Suspend a note after adding a tag:
-##    'Alt+Shift+E': {'tags': 'easy', 'after': 'suspend-note'}
+##    'Shift+E': {'tags': 'easy', 'after': 'suspend-note'}
+## Use all modifier keys to do the same thing:
+##    'Meta+Ctr+Alt+Shift+E': {'tags': 'easy', 'after': 'suspend-note'}
 
 tag_shortcuts = {
-#    'H': {'tags': 'hard', 'action': 'toggle'},
-#    'T': {'tags': 'TODO', 'after': 'bury-note'},
-#    'A': {'tags': 'easy', 'after': 'suspend-card'},
+#    'Shift+H': {'tags': 'hard', 'action': 'toggle'},
+#    'Shift+T': {'tags': 'TODO', 'after': 'bury-note'},
+#    'Shift+A': {'tags': 'easy', 'after': 'suspend-card'},
 }
 
-## END CONFIGURATION OPTIONS
+## END CONFIGURATION
 ########################################
 
 # Testing:
@@ -73,20 +105,19 @@ tag_shortcuts = {
 # some keybindings to add to `tag_shortcuts` that cover most cases.  (Be sure
 # to test `tag_dialog_shortcut` as well).
 
-# The first two should cause an graceful error when Anki is starting up.
-    # 'z': {'tags': 'test-a', 'action': 'blah'},
-    # 'Z': {'tags': 'test-a', 'after': 'blah'},
-    # 'z': {'tags': 'test-a'},
-    # 'Z': {'tags': 'test-b'},
-    # 'x': {'tags': 'test-a', 'action': 'delete'},
-    # 'X': {'tags': 'test-b', 'action': 'delete'},
-    # 'c': {'tags': 'test-a test-b'},
-    # 'q': {'tags': 'test-a test-b', 'action': 'delete'},
-    # 'Q': {'tags': 'test-a test-b', 'action': 'toggle'},
-    # 'r': {'tags': 'test-a test-b', 'after': 'bury-note'},
-    # 'R': {'tags': 'test-a test-b', 'after': 'suspend-note'},
-    # 's': {'tags': 'test-a test-b', 'after': 'bury-card'},
-    # 'S': {'tags': 'test-a test-b', 'after': 'suspend-card'},
+# The first two should cause a graceful error when Anki is starting up.
+    # 'Z': {'tags': 'test-a', 'action': 'blah'},
+    # 'Shift+Z': {'tags': 'test-a', 'after': 'blah'},
+    # 'Z': {'tags': 'test-a'},
+    # 'Shift+Z': {'tags': 'test-b'},
+    # 'X': {'tags': 'test-a', 'action': 'delete'},
+    # 'Shift+X': {'tags': 'test-b', 'action': 'delete'},
+    # 'C': {'tags': 'test-a test-b'},
+    # 'Alt+C': {'tags': 'test-a test-b', 'action': 'delete'},
+    # 'Alt+Shift+C': {'tags': 'test-a test-b', 'action': 'toggle'},
+    # 'Alt+Z': {'tags': 'test-a test-b', 'after': 'bury-card'},
+    # 'Alt+Shift+Z': {'tags': 'test-a test-b', 'after': 'suspend-card'},
+    # 'Meta+Ctrl+Alt+Shift+Z': {'tags': 'lots-of-modifier-keys'}
 
 
 from PyQt4.QtCore import Qt
@@ -123,6 +154,11 @@ def tagKeyHandler(self, event, _old):
         key += Qt.META
 
     key_sequence = QKeySequence(key).toString(QKeySequence.PortableText)
+
+    ## Uncomment this to display keybinding strings for keys that are pressed
+    ## when reviewing cards:
+
+    # showInfo(key_sequence)
 
     note = mw.reviewer.card.note()
     if tag_dialog_shortcut and key_sequence == tag_dialog_shortcut:
