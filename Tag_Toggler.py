@@ -134,13 +134,13 @@ def tagKeyHandler(self, event, _old):
     key = event.key()
 
     if key == Qt.Key_unknown:
-        return
+        _old(self, event)
     # only modifier pushed
     if (key == Qt.Key_Control or
         key == Qt.Key_Shift or
         key == Qt.Key_Alt or
         key == Qt.Key_Meta):
-        return
+        _old(self, event)
 
     # check for combination of keys and modifiers
     modifiers = event.modifiers()
