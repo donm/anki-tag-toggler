@@ -7,15 +7,15 @@ tags.
 For example, here are some ways that I use the add-on:
 - Toggle a 'hard' tag on the current card:
 
-`    'H': {'tags': 'hard', 'action': 'toggle'}`
+`    'Shift+H': {'tags': 'hard', 'action': 'toggle'}`
 
 - Add a 'TODO' tag and bury cards in the current note:
 
-`    'T': {'tags': 'TODO', 'after': 'bury-note'}`
+`    'Shift+T': {'tags': 'TODO', 'after': 'bury-note'}`
 
 - Add an 'easy' tag and suspend the current card:
 
-`    'A': {'tags': 'easy', 'after': 'suspend-card'}`
+`    'Shift+A': {'tags': 'easy', 'after': 'suspend-card'}`
 
 Tag Toggler was inspired by the [Quick
 Tagging](https://github.com/cayennes/Quick_Tagging) add-on by Cayenne Boyer.
@@ -30,3 +30,8 @@ Add-ons*.
 
 Customization is fairly straightforward, with instructions in the source code.
 
+## Other Contributors ##
+
+- [Cayenne Boyer](https://github.com/cayennes) (Wrote the
+  original Quick_Tagging addon)
+- [Glutanimate](https://github.com/Glutanimate)
