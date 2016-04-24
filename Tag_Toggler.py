@@ -169,6 +169,7 @@ def tagKeyHandler(self, event, _old):
         if 'action' not in binding:
             binding['action'] = 'add'
 
+        same_card_shown = False
         if ('after' in binding and
             binding['after'] in ['suspend', 'suspend-note']):
             mw.checkpoint("Edit Tags and Suspend Note")
@@ -190,9 +191,10 @@ def tagKeyHandler(self, event, _old):
         else:
             mw.checkpoint(_("edit Tags"))
             tooltip_message = 'Edited tags: {}'
+            same_card_shown = True
 
         tag_edits = edit_note_tags(note, binding['tags'], binding['action'])
-        reset_and_redraw()
+        reset_and_redraw(same_card_shown)
         tooltip(tooltip_message.format(tag_edits))
     else:
         _old(self, event)
@@ -205,15 +207,15 @@ def edit_tag_dialog(note):
     if dialog_status != 0:  # means "Cancel"
         note.setTagsFromStr(tag_string)
         note.flush()
-        reset_and_redraw()
+        reset_and_redraw(same_card_shown=True)
         tooltip('Tags set to: "{}"'.format(tag_string))
 
 
-def reset_and_redraw():
+def reset_and_redraw(same_card_shown=False):
     """Rebuild the scheduler and redraw the card."""
     answer_state = (mw.reviewer.state == "answer")
     mw.reset()
-    if answer_state:
+    if answer_state and same_card_shown:
         try:
             mw.reviewer._showAnswerHack()
         except:

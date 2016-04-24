@@ -18,6 +18,8 @@ Tag Toggler was inspired by the Quick Tagging add-on by Cayenne Boyer.
 
 <b>Changelog</b>
 <ul>
+<li> 2016-04-23: Version 1.2.1
+  - Fix bug that showed the next card already flipped to answer state.<li>
 <li> 2016-02-28: Version 1.2.0
   - Added support for modifier keys in keybindings.
   - Restore reviewer state after changing tags.</li>
