@@ -1,4 +1,4 @@
-# Tag Toggler 1.1.1 (2016-02-06)
+# Tag Toggler 1.2.1 (2016-04-24)
 # Copyright: Don March <don@ohspite.net>
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 #
