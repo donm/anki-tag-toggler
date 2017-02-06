@@ -1,4 +1,4 @@
-# Tag Toggler 1.2.1 (2016-04-24)
+# Tag Toggler 1.2.2 (2017-02-06)
 # Copyright: Don March <don@ohspite.net>
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 #
@@ -213,11 +213,15 @@ def edit_tag_dialog(note):
 
 def reset_and_redraw(same_card_shown=False):
     """Rebuild the scheduler and redraw the card."""
-    answer_state = (mw.reviewer.state == "answer")
-    mw.reset()
-    if answer_state and same_card_shown:
+    in_answer_state = (mw.reviewer.state == "answer")
+    if same_card_shown:
+        mw.reviewer.card.load()
+        mw.reviewer.cardQueue.append(mw.reviewer.card)
+    mw.moveToState("review")
+
+    if in_answer_state and same_card_shown:
         try:
-            mw.reviewer._showAnswerHack()
+            mw.reviewer._showAnswer()
         except:
             pass
 
