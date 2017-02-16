@@ -1,5 +1,9 @@
 -*- mode: text; eval: (auto-fill-mode -1) -*-
 
+(<b>Please post bug reports and feature requests on GitHub</b>.  We can't track and discuss problems in the comments.)
+
+<b>Overview</b>
+
 Tag Toggler is an add-on for Anki 2 that lets you quickly add and edit tags while reviewing.  You can customize keyboard shortcuts for editing all tags on the current card, as well as quickly adding, deleting, or toggling specific preset tags.  After applying the tags, you can optionally bury the card, bury the note, suspend the card, or suspend the note.
 
 Applying a tag to a card applies the tags to all cards in that note, which is how Anki always handles tags.
@@ -16,20 +20,16 @@ Customization is fairly straightforward, with instructions in the source code.
 
 Tag Toggler was inspired by the Quick Tagging add-on by Cayenne Boyer.
 
-<b>Changelog</b>
+<b>Recent Changes</b>
 <ul>
+<li> 2017-02-15: Version 1.2.2
+  - Fix bug that sometimes caused a new card to be shown after applying tags.</li>
 <li> 2016-04-23: Version 1.2.1
-  - Fix bug that showed the next card already flipped to answer state.<li>
+  - Fix bug that showed the next card already flipped to answer state.</li>
 <li> 2016-02-28: Version 1.2.0
   - Added support for modifier keys in keybindings.
   - Restore reviewer state after changing tags.</li>
-<li> 2016-02-06: Version 1.1.1
-  - Fix bug occurring when using the 'bury-card' option after tagging a card.</li>
-<li> 2016-01-25: Version 1.1.0
-  - Allow suspending individual cards with the 'bury-card' and 'suspend-card' actions.
-  - Call <code>note.flush</code> after using tagging dialog.
-  - Redraw the card after making changes to tags, in case <code>{{Tags}}</code> is being used in the template.</li>
-<li> 2016-01-16: Version 1.0.0</li></ul>
+</ul>
 
 <b>Links</b>
 
@@ -39,4 +39,3 @@ Source code repository: github.com/ohspite/anki-tag-toggler
 
 If you have any bugs to report, feature requests, or other feedback, please use the GitHub issue tracker: github.com/ohspite/anki-tag-toggler/issues
 
-<b>Please post bug reports on GitHub</b>.  We can't track and discuss problems in the comments.
